@@ -1,11 +1,18 @@
-import React from 'react'
+import { MDBFooter, MDBContainer } from 'mdb-react-ui-kit';
 
-const Footer = () => {
+export function ViewFooter() {
   return (
-    <div>
-      <h2>Footer</h2>
-    </div>
-  )
-}
+    <MDBFooter style={{ backgroundColor: '#92a8d1', height: 58 }}>
+      <MDBContainer></MDBContainer>
 
-export default Footer
+      <div style={{ backgroundColor: '#92a8d1',textAlign: "center"}}>
+        © 2024 Copyright:
+        <a href='https://mdbootstrap.com/'>
+          F_Otsuka.com
+        </a>
+      </div>
+    </MDBFooter>
+  );
+}
+ 
+export default ViewFooter

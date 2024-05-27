@@ -9,7 +9,7 @@ const Index = () => {
       <div className="header">
         <Header />
       </div>
-      <div className="body">
+      <div className="body" style={{height: 680}}>
         <div>
           <h1>Index.tsx</h1>
           【以下コンポーネントの取り纏めを行う】
@@ -20,9 +20,9 @@ const Index = () => {
         <div>
           <RightSide />
         </div>
-        <div>
+      </div>
+      <div className="footer">
           <Footer />
-        </div>
       </div>
     </div>
   )
