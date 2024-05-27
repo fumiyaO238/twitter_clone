@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 
 const pages = ['Home', 'Blog', 'Users'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -37,9 +38,9 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl" style={{marginLeft: 15}}>
+      <Container maxWidth="xl" style={{margin: "auto"}}>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 0.5 }} />
+          <EditCalendarIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 0.5 }} />
           {/* アイコン右のタイトル */}
           <Typography
             variant="h3"
@@ -56,7 +57,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Dialy
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
