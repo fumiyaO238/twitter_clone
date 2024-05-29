@@ -81,7 +81,7 @@ const BlogList = () => {
           <p key={blog.id}>
             {blog.content}
           </p>
-          <button name="button-delete" onClick={() => deleteBlog(blog.id)}>
+          <button className="button" onClick={() => deleteBlog(blog.id)}>
             delete
           </button>
         </div>
