@@ -38,7 +38,7 @@ function ViewHeader() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl" style={{margin: "auto"}}>
+      <Container maxWidth="xl" style={{ margin: "auto" }}>
         <Toolbar disableGutters>
           <EditCalendarIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 0.5 }} />
           {/* アイコン右のタイトル */}
@@ -113,7 +113,7 @@ function ViewHeader() {
               textDecoration: 'none',
             }}
           >
-            
+
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
