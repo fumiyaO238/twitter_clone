@@ -10,12 +10,37 @@ type BlogType = {
   updated_at: Date;
 };
 
+type AddBlogType = {
+  content: string;
+  // id: string;
+}
+
 const BlogList = () => {
   const [blogs, setBlogs] = useState<BlogType[]>([]);
+  const { register, handleSubmit } = useForm<AddBlogType>();
 
+  //タスクの追加
+  const addBlog = async (event: AddBlogType) => {
+    const blog = event.content;
+    console.log(blog);
+    await axios
+      .post("http://localhost:3333/add", {
+        data: { blog }
+      })
+      .then((response) => {
+        console.log(response.data);
+        const blog = response.data;
+        setBlogs((preBlogs) => [blog, ...preBlogs]);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  // getリクエスト
   useEffect(() => {
     axios.get("http://localhost:3333").then((response) => {
-      console.log(response.data.blogs);
+      // console.log(response.data.blogs);
       const { blogs } = response.data;
       setBlogs(blogs);
     });
@@ -23,7 +48,18 @@ const BlogList = () => {
 
   return (
     <div>
-      <h1 style={{margin:"auto"}}>BlogList</h1>
+      <h1 style={{margin:"auto"}}>
+        BlogList
+      </h1>
+
+      <form onSubmit={handleSubmit(addBlog)}>
+        <input {...register("content")} type="text" />
+        <button type="submit">add</button>
+      </form>
+
+      {blogs.map((blog) => (
+        <p key={blog.id}>{blog.content}</p>
+      ))}
     </div>
   )
 }
