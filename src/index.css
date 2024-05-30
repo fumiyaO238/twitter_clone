@@ -17,3 +17,12 @@ code {
   width: 50px;
   margin: 16px;
 }
+/* footerを画面下部に固定 */
+footer{
+  position: fixed;
+  width:100%;
+  height:56px;
+  bottom:0;
+  text-align:center;
+  z-index: 1000;
+}

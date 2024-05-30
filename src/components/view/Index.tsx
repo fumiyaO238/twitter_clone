@@ -11,7 +11,7 @@ const Index = () => {
         <Header />
       </div>
 
-      <div className="body" style={{height: 699}}>
+      <div className="body">
         <div className="blog-list">
           <BlogList />
         </div>

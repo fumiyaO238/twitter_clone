@@ -13,5 +13,5 @@ export function ViewFooter() {
     </MDBFooter>
   );
 }
- 
+ //viwheightの一番下配置
 export default ViewFooter;
