@@ -34,13 +34,6 @@ function Copyright(props: any) {
   );
 }
 
-type UserType = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-}
-
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
@@ -48,7 +41,6 @@ export default function SignUp() {
   const [isRevealPassword, setIsRevealPassword] = useState(false);
   const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
   const [msg, setMsg] = useState("");
-  const [register, setRegister] = useState<UserType[]>([]);
 
   // パスワード表示切替
   const togglePassword = () => {
