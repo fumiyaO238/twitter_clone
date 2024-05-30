@@ -16,6 +16,8 @@ import { useState } from 'react';
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { InputAdornment } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { red } from '@mui/material/colors';
 
 // 最下部のコピーライト情報
 function Copyright(props: any) {
@@ -31,17 +33,29 @@ function Copyright(props: any) {
   );
 }
 
+type SignUp = {
+  fullName: string,
+  email: string,
+  pass: string,
+  repass: string,
+}
+
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function SignUp() {
   const [isRevealPassword, setIsRevealPassword] = useState(false);
-  const [isAgree, setIsAgree] = useState(false);
+  const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
+  const [msg, setMsg] = useState("");
 
   // パスワード表示切替
   const togglePassword = () => {
     setIsRevealPassword((prevState) => !prevState);
   }
+  const toggleConfirmPassword = () => {
+    setIsRevealConfirmPassword((prevState) => !prevState);
+  }
+
   // sign upボタン押下時イベント
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -49,14 +63,19 @@ export default function SignUp() {
     const lastName = data.get("lastName");
     const firstName =  data.get("firstName");
     const fullName = (`${lastName} ${firstName}`);
-    console.log(fullName)
+    const email = data.get('email');
+    const pass = data.get('password');
+    const repass = data.get('repassword')
 
-    console.log({
-      name: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
-      confirm: data.get('repassword'),
-    });
+    if( firstName !== "" && lastName !== "" && email !== "" && pass !== "" && repass !== "" ) {
+      if( pass !== repass ){
+        setMsg("パスワードが一致しません。")
+      } else {
+        console.log("成功")
+      }
+    } else {
+      setMsg("未入力箇所があります。")
+    }
   };
 
   return (
@@ -79,6 +98,7 @@ export default function SignUp() {
             Sign up
           </Typography>
           {/* body */}
+          <div style={{color: "red"}}>{msg}</div>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               {/* name */}
@@ -162,17 +182,17 @@ export default function SignUp() {
                   fullWidth
                   name="repassword"
                   label="Confirm Password"
-                  type={isRevealPassword ? "text" : "password"}
+                  type={isRevealConfirmPassword ? "text" : "password"}
                   id="rePassword"
                   autoComplete="new-password"
                   className='repassword'
                   InputProps={{
                     endAdornment:
                       <InputAdornment position="end">
-                        {isRevealPassword ? (
+                        {isRevealConfirmPassword ? (
                           // 表示
                           <VisibilityOffIcon
-                            onClick={togglePassword}
+                            onClick={toggleConfirmPassword}
                             className="Password__visual"
                             sx={{
                               ":hover": {
@@ -183,7 +203,7 @@ export default function SignUp() {
                         ) : (
                           // 非表示
                           <VisibilityIcon
-                            onClick={togglePassword}
+                            onClick={toggleConfirmPassword}
                             className="Password__visual"
                             sx={{
                               ":hover": {
@@ -197,12 +217,12 @@ export default function SignUp() {
                 />
               </Grid>
               {/* check box */}
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={<Checkbox value="isAgree" color="primary" />}
                   label="I agree with anything."
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
             {/* button */}
             <Button
