@@ -18,6 +18,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { InputAdornment } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { red } from '@mui/material/colors';
+import axios from 'axios';
 
 // 最下部のコピーライト情報
 function Copyright(props: any) {
@@ -33,11 +34,11 @@ function Copyright(props: any) {
   );
 }
 
-type SignUp = {
-  fullName: string,
-  email: string,
-  pass: string,
-  repass: string,
+type UserType = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
 }
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -47,6 +48,7 @@ export default function SignUp() {
   const [isRevealPassword, setIsRevealPassword] = useState(false);
   const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
   const [msg, setMsg] = useState("");
+  const [register, setRegister] = useState<UserType[]>([]);
 
   // パスワード表示切替
   const togglePassword = () => {
@@ -54,6 +56,25 @@ export default function SignUp() {
   }
   const toggleConfirmPassword = () => {
     setIsRevealConfirmPassword((prevState) => !prevState);
+  }
+
+  const addSignUp = async (fullName: string, email: any, pass: any) => {
+    // console.log({fullName, email, pass})
+    await axios
+      .post("http://localhost:3333/signup", {
+        fullName: fullName,
+        email: email,
+        password: pass
+      })
+      .then((response) => {
+        console.log("登録成功")
+        console.log(response.data);
+        // setRegister((preTodos) => [todo, ...preTodos]);
+      })
+      .catch((error) => {
+        console.log("登録失敗")
+        console.log(error);
+      })
   }
 
   // sign upボタン押下時イベント
@@ -71,7 +92,8 @@ export default function SignUp() {
       if( pass !== repass ){
         setMsg("パスワードが一致しません。")
       } else {
-        console.log("成功")
+        setMsg("");
+        addSignUp(fullName, email, pass );
       }
     } else {
       setMsg("未入力箇所があります。")
