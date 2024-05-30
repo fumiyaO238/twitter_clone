@@ -1,11 +1,14 @@
-import ViewMain from "./components/main/ViewMain";
+import { AppRoutes } from './components/router/Router';
+import { BrowserRouter } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <ViewMain />
-    </div>
-  );
+    <>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+    </>
+  )
 }
 
 export default App;

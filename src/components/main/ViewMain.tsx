@@ -1,4 +1,3 @@
-import React from 'react'
 import Index from '../view/Index'
 
 const ViewMain = () => {
@@ -9,4 +8,4 @@ const ViewMain = () => {
   )
 }
 
-export default ViewMain
+export default ViewMain;
