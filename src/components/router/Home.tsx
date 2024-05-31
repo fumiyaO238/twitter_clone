@@ -44,6 +44,7 @@ export default function Signin() {
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
+        {/* Home画面左側の写真 */}
         <Grid
           item
           xs={false}
@@ -57,7 +58,11 @@ export default function Signin() {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
-        />
+        >
+          {/* <h1 className='home-title'>New Jeans</h1> */}
+        </Grid>
+
+        {/* Home画面右側のsignin画面 */}
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
