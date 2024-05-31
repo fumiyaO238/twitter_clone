@@ -3,6 +3,7 @@ import ViewMain from "../main/ViewMain";
 import SignUp from "../user/Signup";
 import Home from "./Home";
 import Signin from "../user/Signin";
+import Error404 from "../view/Error404";
 
 
 export const AppRoutes = () => {
@@ -11,7 +12,8 @@ export const AppRoutes = () => {
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/main" element={<ViewMain />} />
+            <Route path="/blog-list" element={<ViewMain />} />
+            <Route path="/*" element={<Error404 />} />
         </Routes>
     )
 }

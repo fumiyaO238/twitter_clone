@@ -13,8 +13,22 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
+import { Link, Routes } from 'react-router-dom';
 
-const pages = ['Home', 'Blog', 'Users'];
+const pages = [
+  {
+    title:'Home',
+    url:'/'
+  },
+  {
+    title:'Blog',
+    url:'/blog-list'
+  },
+  {
+    title:'Users',
+    url:'/signup' //←後で直す
+  }
+];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ViewHeader() {
@@ -41,7 +55,7 @@ function ViewHeader() {
       <Container maxWidth="xl" style={{ margin: "auto" }}>
         <Toolbar disableGutters>
           <EditCalendarIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 0.5 }} />
-          {/* アイコン右のタイトル */}
+          {/*　ヘッダー左のタイトル */}
           <Typography
             variant="h3"
             noWrap
@@ -90,8 +104,8 @@ function ViewHeader() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -118,11 +132,13 @@ function ViewHeader() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.title}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                <Link to={page.url}>
+                  {page.title}
+                </Link>
               </Button>
             ))}
           </Box>

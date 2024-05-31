@@ -11,6 +11,7 @@
 .navbar h1 {
   color: #000000;
   font-size: 30px;
+  font-family: "Quicksand";
 }
 .navbar .links {
   margin-left: auto;
@@ -35,7 +36,7 @@
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
   margin: 0;
-  font-family: "Quicksand";
+  /* font-family: "Quicksand"; */
   color: #000000;
 }
 .blog-preview:hover {
