@@ -1,7 +1,5 @@
 import Header from './Header';
 import Footer from './Footer';
-import LeftSide from './LeftSide';
-import RightSide from './RightSide';
 import BlogList from '../parts/BlogList';
 
 const Index = () => {
