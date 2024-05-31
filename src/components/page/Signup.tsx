@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -16,9 +14,8 @@ import { useState } from 'react';
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { InputAdornment } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { red } from '@mui/material/colors';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 // 最下部のコピーライト情報
 function Copyright(props: any) {
@@ -41,6 +38,7 @@ export default function SignUp() {
   const [isRevealPassword, setIsRevealPassword] = useState(false);
   const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
   const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
   // パスワード表示切替
   const togglePassword = () => {
@@ -50,8 +48,8 @@ export default function SignUp() {
     setIsRevealConfirmPassword((prevState) => !prevState);
   }
 
+  // apiからの返事処理
   const addSignUp = async (fullName: string, email: any, pass: any) => {
-    // console.log({fullName, email, pass})
     await axios
       .post("http://localhost:3333/signup", {
         fullName: fullName,
@@ -61,7 +59,7 @@ export default function SignUp() {
       .then((response) => {
         console.log("登録成功")
         console.log(response.data);
-        // setRegister((preTodos) => [todo, ...preTodos]);
+        navigate("/signin")
       })
       .catch((error) => {
         console.log("登録失敗")
@@ -74,18 +72,18 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const lastName = data.get("lastName");
-    const firstName =  data.get("firstName");
+    const firstName = data.get("firstName");
     const fullName = (`${lastName} ${firstName}`);
     const email = data.get('email');
     const pass = data.get('password');
     const repass = data.get('repassword')
 
-    if( firstName !== "" && lastName !== "" && email !== "" && pass !== "" && repass !== "" ) {
-      if( pass !== repass ){
+    if (firstName !== "" && lastName !== "" && email !== "" && pass !== "" && repass !== "") {
+      if (pass !== repass) {
         setMsg("パスワードが一致しません。")
       } else {
         setMsg("");
-        addSignUp(fullName, email, pass );
+        addSignUp(fullName, email, pass);
       }
     } else {
       setMsg("未入力箇所があります。")
@@ -112,7 +110,7 @@ export default function SignUp() {
             Sign up
           </Typography>
           {/* body */}
-          <div style={{color: "red"}}>{msg}</div>
+          <div style={{ color: "red" }}>{msg}</div>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               {/* name */}
