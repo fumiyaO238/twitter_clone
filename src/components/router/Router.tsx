@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import ViewMain from "../main/ViewMain";
-import SignUp from "../user/Signup";
-import Home from "./Home";
-import Signin from "../user/Signin";
-import Error404 from "../view/Error404";
+import SignUp from "../page/Signup";
+import Home from "../page/Home";
+import Signin from "../page/Signin";
+import Error404 from "../page/Error404";
 
 
 export const AppRoutes = () => {
