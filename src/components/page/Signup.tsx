@@ -48,7 +48,7 @@ export default function SignUp() {
     setIsRevealConfirmPassword((prevState) => !prevState);
   }
 
-  // apiからの返事処理
+  // api通信返事処理
   const addSignUp = async (fullName: string, email: any, pass: any) => {
     await axios
       .post("http://localhost:3333/signup", {

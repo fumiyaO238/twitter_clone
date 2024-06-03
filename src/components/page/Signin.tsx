@@ -14,6 +14,8 @@ import { useState } from 'react';
 import { InputAdornment } from '@mui/material';
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/Visibility";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 // 最下部のコピーライト情報
 function Copyright(props: any) {
@@ -34,10 +36,30 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const [isRevealPassword, setIsRevealPassword] = useState(false);
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
   // パスワード表示切替
   const togglePassword = () => {
     setIsRevealPassword((prevState) => !prevState);
+  }
+
+  // api通信返事処理
+  const login = async (email: any, password: any) => {
+    await axios
+      .post("http://localhost:3333/login", {
+        email: email,
+        password: password
+      })
+      .then((response) => {
+        console.log("ログイン成功")
+        console.log(response.data);
+        navigate("/blog-list")
+      })
+      .catch((error) => {
+        console.log("登録失敗")
+        console.log(error);
+      })
   }
 
   // DBのデータと照合チェック
@@ -46,6 +68,13 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
+
+    if(email == "" || password == "") {
+      setMsg("未入力箇所があります。")
+    } else {
+      console.log("DBに値送信します")
+      login(email, password);
+    }
   };
 
   return (
@@ -66,6 +95,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          <div style={{ color: "red" }}>{msg}</div>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             {/* email */}
             <TextField
