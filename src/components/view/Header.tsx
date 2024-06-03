@@ -26,10 +26,28 @@ const pages = [
   },
   {
     title:'Users',
-    url:'/signup' //←後で直す
+    url:'/user-list' 
   }
 ];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [
+    {
+      title:'Profile', 
+      url:'/profile'
+    },
+    {
+      title:'Account',
+      url:'/account'
+    },
+    {
+      title:'Dashboard',
+      url:'/dashboard'
+    },
+    {
+      title:'Logout',
+      url:'/logout'
+    },
+    
+  ];
 
 function ViewHeader() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -115,7 +133,7 @@ function ViewHeader() {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -168,8 +186,10 @@ function ViewHeader() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
+                  <Link to={setting.url}>
+                    {setting.title}
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
