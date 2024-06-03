@@ -7,8 +7,8 @@ type BlogType = {
   id: number;
   content: string;
   user_id: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at: any;
+  updated_at: any;
 };
 
 // type AddBlogType = {
@@ -65,6 +65,7 @@ const BlogList = () => {
         .then((response) => {
           setIsPending(false)
           const { blogs } = response.data;
+          console.log(blogs[1].created_at)
           setBlogs(blogs);
         });
     }, 1000);
@@ -85,7 +86,7 @@ const BlogList = () => {
       </nav>
 
       <div>
-        {isPending && <h3>Now Loading...</h3>}
+        {isPending && <h3 style={{margin: 30}}>Now Loading...</h3>}
       </div>
       {/* <form onSubmit={handleSubmit(addBlog)}>
       <input {...register("content")} type="text" />
@@ -95,10 +96,10 @@ const BlogList = () => {
         <div className="blogs">
           {blogs.map((blog) => (
             <div className="blog-preview" key={blog.id} >
-              <p className="author">投稿主 : {blog.user_id}</p>
+              <p className="author">投稿者 : {blog.user_id}</p>
               <h4>{blog.content}</h4>
               <span style={{display: "flex"}}>
-                <p className="date">投稿日時 : 2024/06/03 12:00</p>
+                <p className="date">投稿日時 : {blog.created_at}</p>
                 <button className="button" onClick={() => deleteBlog(blog.id)}>
                   delete
                 </button>
