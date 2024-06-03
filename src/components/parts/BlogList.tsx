@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import '../styles/styleBlogList.css';
 
 type BlogType = {
@@ -11,33 +11,33 @@ type BlogType = {
   updated_at: Date;
 };
 
-type AddBlogType = {
-  content: string;
-  // id: string;
-}
+// type AddBlogType = {
+//   content: string;
+//   // id: string;
+// }
 
 const BlogList = () => {
   const [blogs, setBlogs] = useState<BlogType[]>([]);
-  const { register, handleSubmit } = useForm<AddBlogType>();
+  // const { register, handleSubmit } = useForm<AddBlogType>();
   const [isPending, setIsPending] = useState(true);
 
   // ブログの追加
-  const addBlog = async (event: AddBlogType) => {
-    const blog = event.content;
-    console.log(blog);
-    await axios
-      .post("http://localhost:3333/add", {
-        data: { blog }
-      })
-      .then((response) => {
-        console.log(response.data);
-        const blog = response.data;
-        setBlogs((preBlogs) => [blog, ...preBlogs]);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
+  // const addBlog = async (event: AddBlogType) => {
+  //   const blog = event.content;
+  //   console.log(blog);
+  //   await axios
+  //     .post("http://localhost:3333/add", {
+  //       data: { blog }
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       const blog = response.data;
+  //       setBlogs((preBlogs) => [blog, ...preBlogs]);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
+  // }
 
   // ブログの削除
   const deleteBlog = async (id: number) => {
@@ -92,17 +92,20 @@ const BlogList = () => {
       <button type="submit">add</button>
     </form> */}
       <div className="blog-list">
-        {blogs.map((blog) => (
-          <div className="blog-preview" key={blog.id} >
-            <h3>{blog.content}</h3>
-            <span style={{display: "flex"}}>
-              <p>投稿主 {blog.user_id}</p>
-              <button className="button" onClick={() => deleteBlog(blog.id)}>
-                delete
-              </button>
-            </span>
-          </div>
-        ))}
+        <div className="blogs">
+          {blogs.map((blog) => (
+            <div className="blog-preview" key={blog.id} >
+              <p className="author">投稿主 : {blog.user_id}</p>
+              <h4>{blog.content}</h4>
+              <span style={{display: "flex"}}>
+                <p className="date">投稿日時 : 2024/06/03 12:00</p>
+                <button className="button" onClick={() => deleteBlog(blog.id)}>
+                  delete
+                </button>
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
     </div>

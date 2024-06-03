@@ -12,6 +12,7 @@
   color: #000000;
   font-size: 30px;
   font-family: "Quicksand";
+  margin: 8px
 }
 .navbar .links {
   margin-left: auto;
@@ -31,13 +32,34 @@
 }
 
 /* blog previews / list */
+.blogs {
+  width:100%;height:auto;
+  display:flex;
+  flex-wrap:wrap;/* これを指定する */
+  justify-content:space-evenly;
+}
+.blog-preview {
+  width: calc(100% / 5);
+  height:auto;
+  display:flex;
+  flex-direction:column;
+  list-style: none;
+  background: #eae7e74f;
+  text-align: center;
+  /* padding: 20px 0; */
+  border: 1px solid #fff;
+  color: #000000;
+}
 .blog-preview {
   padding: 10px 16px;
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
-  margin: 0;
+  margin: 0; 
   /* font-family: "Quicksand"; */
-  color: #000000;
+}
+.author {
+  text-align: start;
+  margin-top: 0%;
 }
 .blog-preview:hover {
   box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
@@ -46,4 +68,17 @@
   font-size: 20px;
   margin-bottom: 0px;
   padding-bottom: 0%;
+}
+.blog-preview span {
+  justify-content: flex-end;
+}
+.blog-list p {
+  font-size: small;
+  margin-top: auto;
+  margin-bottom: 0;
+}
+.blog-preview button {
+  margin-left: 5px;
+  margin-right: 0;
+  margin-bottom: 0;
 }

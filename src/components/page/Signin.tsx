@@ -52,12 +52,16 @@ export default function SignIn() {
         password: password
       })
       .then((response) => {
-        console.log("ログイン成功")
-        console.log(response.data);
-        navigate("/blog-list")
+        const result = response.data.result;
+        if(result.length === 1) {
+          console.log("ログイン成功")
+          navigate("/blog-list")
+        } else {
+          alert("ログインに失敗しました。\n入力された情報が間違っています。")
+        }
       })
       .catch((error) => {
-        console.log("登録失敗")
+        console.log("ログイン失敗")
         console.log(error);
       })
   }
@@ -69,7 +73,7 @@ export default function SignIn() {
     const email = data.get("email");
     const password = data.get("password");
 
-    if(email == "" || password == "") {
+    if(email === "" || password === "") {
       setMsg("未入力箇所があります。")
     } else {
       console.log("DBに値送信します")
