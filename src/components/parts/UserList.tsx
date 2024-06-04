@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Header from "../view/Header";
 import Footer from "../view/Footer";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Icon } from "@mui/material";
 
 type UserType = {
   id: string;
@@ -34,7 +33,7 @@ const UserList = () => {
 
   return (
     <div>
-      <Header></Header>
+      <Header />
       <div className="user-list">
         <h1>UserList</h1>
         <div>
@@ -56,7 +55,7 @@ const UserList = () => {
           </ul>
         </div>
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   )
 }

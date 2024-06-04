@@ -39,7 +39,8 @@ body {
 .list-item h4 {
   padding-left: 0%;
   margin: 10px;
-  width: 150px;
+  margin-left: 5px;
+  width: 200px;
 }
 .flex {
   display: flex;

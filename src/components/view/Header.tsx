@@ -72,19 +72,19 @@ function ViewHeader() {
     <AppBar position="static">
       <Container maxWidth="xl" style={{ margin: "auto" }}>
         <Toolbar disableGutters>
-          <EditCalendarIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 0.5 }} />
+          <EditCalendarIcon style={{fontSize:50}} sx={{ display: { xs: 'none', md: 'flex' }, mr: 0.5 }} />
           {/*　ヘッダー左のタイトル */}
           <Typography
             variant="h3"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/user-list"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 500,
-              letterSpacing: '.3rem',
+              letterSpacing: '0.1rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
