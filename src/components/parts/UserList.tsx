@@ -32,8 +32,6 @@ const UserList = () => {
     }, 1000);
   }, []);
 
-  // console.log(users);
-
   return (
     <div>
       <Header></Header>
@@ -48,7 +46,7 @@ const UserList = () => {
             {users.map((user) => (
               <li className="list-item" key={user.id}>
                 <div className="flex">
-                  <AccountCircleIcon />
+                  <AccountCircleIcon style={{fontSize:50, color:"gray", marginLeft:"5px"}} />
                   <Link to={user.id}>
                     <h4>{user.name}</h4>
                   </Link>
