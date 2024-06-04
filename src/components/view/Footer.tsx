@@ -1,5 +1,4 @@
-import { VerticalAlignBottom } from '@mui/icons-material';
-import { MDBFooter, MDBContainer } from 'mdb-react-ui-kit';
+import { MDBFooter } from 'mdb-react-ui-kit';
 
 export function ViewFooter() {
   return (

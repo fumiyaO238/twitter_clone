@@ -18,6 +18,7 @@ type UserType = {
 const UserList = () => {
   const [users, setUsers] = useState<UserType[]>([]);
   const [isPending, setIsPending] = useState(true);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   // getリクエスト
   useEffect(() => {
@@ -30,6 +31,10 @@ const UserList = () => {
         });
     }, 1000);
   }, []);
+
+  const handleClickFollow = (id: string) => {
+    setIsFollowing(!isFollowing)
+  }
 
   return (
     <div>
@@ -44,14 +49,16 @@ const UserList = () => {
             {users.map((user) => (
               <li className="list-item" key={user.id}>
                 <div className="flex">
-                  <AccountCircleIcon style={{fontSize:50, color:"gray", marginLeft:"5px"}} />
+                  <AccountCircleIcon style={{ fontSize: 50, color: "gray", marginLeft: "5px" }} />
                   <Link to={user.id}>
                     <h4>{user.name}</h4>
                   </Link>
                   <p>2024年04月から利用しています</p>
-                  <button >
-                    Follow
-                  </button>
+                  {user.id !== "id1" &&              //自分のにはボタン付けない
+                    <button onClick={() => { handleClickFollow(user.id) }}>
+                      {isFollowing ? "Follow" : "UnFollow"}
+                    </button>
+                  }
                 </div>
               </li>
             ))}
