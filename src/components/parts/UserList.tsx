@@ -39,7 +39,6 @@ const UserList = () => {
         <div>
           {isPending && <h3 style={{ margin: 30 }}>Now Loading...</h3>}
         </div>
-
         <div className="container">
           <ul className="list">
             {users.map((user) => (
