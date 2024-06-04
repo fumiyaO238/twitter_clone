@@ -40,8 +40,38 @@ body {
   padding-left: 0%;
   margin: 10px;
   margin-left: 5px;
-  width: 200px;
+  width: 150px;
 }
+
+.list-item p {
+  color: #ababab;
+  margin-top: 13px;
+  margin-right: 15px;
+}
+
 .flex {
   display: flex;
+}
+
+.flex button {
+  margin:auto;
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #4eaefc, #0300bd);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: system-ui,"Helvetica Neue",Arial,sans-serif;
+  height: 40px;
+  padding: 0 20px;
+  text-align: center;
+  touch-action: manipulation;
+  width: 20%;
+  z-index: 9;
+  border: 0;
+}
+
+.flex button:hover {
+  background: #a8aae9;
 }

@@ -49,6 +49,10 @@ const UserList = () => {
                   <Link to={user.id}>
                     <h4>{user.name}</h4>
                   </Link>
+                  <p>2024年04月から利用しています</p>
+                  <button >
+                    Follow
+                  </button>
                 </div>
               </li>
             ))}
