@@ -65,7 +65,6 @@ const BlogList = () => {
         .then((response) => {
           setIsPending(false)
           const { blogs } = response.data;
-          console.log(blogs[1].created_at)
           setBlogs(blogs);
         });
     }, 1000);
@@ -77,11 +76,7 @@ const BlogList = () => {
       <nav className="navbar">
         <h1>BlogList</h1>
         <div className="links">
-          <a href="/create" style={{
-            color: "white",
-            backgroundColor: "#f1356d",
-            borderRadius: "8px"
-          }}>New Blog</a>
+          <a href="/create">New Blog</a>
         </div>
       </nav>
 

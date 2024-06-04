@@ -1,26 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 .navbar {
-  padding: 1px;
+  padding: 3px;
   display: flex;
   align-items: center;
   max-width: 400px;
   margin: 0 auto;
-  border-bottom: 0.5px solid #f2f2f2;
+  border-bottom: 2px solid #000000;
 }
 .navbar h1 {
   color: #000000;
   font-size: 30px;
   font-family: "Quicksand";
-  margin: 8px
+  margin: 8px;
 }
 .navbar .links {
   margin-left: auto;
+  margin-top: 5px;
 }
 .navbar a {
   margin-left: 16px;
   text-decoration: none;
   padding: 10px;
+  color: white;
+  background-color: #f1356d;
+  border-radius: 10px;
 }
 .navbar a:hover {
   color: #f1356d;
@@ -35,8 +39,9 @@
 .blogs {
   width:100%;height:auto;
   display:flex;
-  flex-wrap:wrap;/* これを指定する */
-  justify-content:space-evenly;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  margin-top: 10px;
 }
 .blog-preview {
   width: calc(100% / 5);
@@ -44,30 +49,20 @@
   display:flex;
   flex-direction:column;
   list-style: none;
-  background: #eae7e74f;
+  background: #bfdef9cd;
   text-align: center;
-  /* padding: 20px 0; */
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   color: #000000;
-}
-.blog-preview {
   padding: 10px 16px;
-  margin: 20px 0;
+  margin: 10px 0;
   border-bottom: 1px solid #fafafa;
-  margin: 0; 
-  /* font-family: "Quicksand"; */
+  border-radius: 10px;
 }
+
+/* blogList内のテキスト設定 */
 .author {
   text-align: start;
   margin-top: 0%;
-}
-.blog-preview:hover {
-  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
-}
-.blog-preview h3 {
-  font-size: 20px;
-  margin-bottom: 0px;
-  padding-bottom: 0%;
 }
 .blog-preview span {
   justify-content: flex-end;
