@@ -2,9 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "../styles/styleUserList.css";
 import { Link } from "react-router-dom";
-import { idText } from "typescript";
 import Header from "../view/Header";
 import Footer from "../view/Footer";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Icon } from "@mui/material";
 
 type UserType = {
   id: string;
@@ -31,6 +32,8 @@ const UserList = () => {
     }, 1000);
   }, []);
 
+  // console.log(users);
+
   return (
     <div>
       <Header></Header>
@@ -44,9 +47,12 @@ const UserList = () => {
           <ul className="list">
             {users.map((user) => (
               <li className="list-item" key={user.id}>
-                <Link to={user.id}>
-                  <h4>{user.name}</h4>
-                </Link>
+                <div className="flex">
+                  <AccountCircleIcon />
+                  <Link to={user.id}>
+                    <h4>{user.name}</h4>
+                  </Link>
+                </div>
               </li>
             ))}
           </ul>

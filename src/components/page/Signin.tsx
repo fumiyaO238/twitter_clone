@@ -57,12 +57,12 @@ export default function SignIn() {
           console.log("ログイン成功")
           navigate("/blog-list")
         } else {
-          alert("ログインに失敗しました。\n入力された情報が間違っています。")
+          alert("※ログイン失敗\nログインに失敗しました。\n入力された情報が間違っています。\n再度ご入力いただくか、サインアップから始めてください。")
         }
       })
       .catch((error) => {
         console.log("ログイン失敗")
-        console.log(error);
+        alert(error.response.data.message);
       })
   }
 

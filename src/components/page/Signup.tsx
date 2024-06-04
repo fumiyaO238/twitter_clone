@@ -63,7 +63,7 @@ export default function SignUp() {
       })
       .catch((error) => {
         console.log("登録失敗")
-        console.log(error);
+        alert(error.response.data.message);
       })
   }
 
@@ -73,7 +73,7 @@ export default function SignUp() {
     const data = new FormData(event.currentTarget);
     const lastName = data.get("lastName");
     const firstName = data.get("firstName");
-    const fullName = (`${lastName} ${firstName}`);
+    const fullName = (`${lastName}${firstName}`);
     const email = data.get('email');
     const pass = data.get('password');
     const repass = data.get('repassword')
