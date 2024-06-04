@@ -154,7 +154,7 @@ function ViewHeader() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link to={page.url}>
+                <Link to={page.url} className='items'>
                   {page.title}
                 </Link>
               </Button>
@@ -187,7 +187,7 @@ function ViewHeader() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
-                  <Link to={setting.url}>
+                  <Link to={setting.url} className='items'>
                     {setting.title}
                   </Link>
                 </MenuItem>

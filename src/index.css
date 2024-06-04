@@ -7,6 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-color: #fff; */
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -41,4 +42,9 @@ footer{
   font-size: 100px;
   color:#fff;
   margin:0;
+}
+
+.items {
+  text-decoration: none;
+  color: black;
 }
