@@ -16,6 +16,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Home from '../parts/Home';
 
 // 最下部のコピーライト情報
 function Copyright(props: any) {
@@ -64,7 +65,7 @@ export default function Start() {
           console.log(result)
 
           setIsExist(true);
-          navigate("/blog-list")
+          // navigate("/blog-list")
         } else {
           alert(response.data.message)
         }
@@ -89,6 +90,12 @@ export default function Start() {
   };
 
   return (
+    <>
+      {isExist ? (
+        <>
+          <Home isExist={isExist} />
+        </>
+      ) : (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
@@ -211,5 +218,7 @@ export default function Start() {
         </Grid>
       </Grid>
     </ThemeProvider>
+    )}
+    </>
   );
 }

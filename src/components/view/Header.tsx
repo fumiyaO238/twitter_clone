@@ -38,10 +38,10 @@ const settings = [
       title:'Account',
       url:'/account'
     },
-    {
-      title:'Dashboard',
-      url:'/dashboard'
-    },
+    // {
+    //   title:'Dashboard',
+    //   url:'/dashboard'
+    // },
     {
       title:'Logout',
       url:'/'

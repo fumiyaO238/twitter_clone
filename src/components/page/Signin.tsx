@@ -17,6 +17,7 @@ import Container from '@mui/material/Container';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Home from '../parts/Home';
 
 // 最下部のコピーライト情報
 function Copyright(props: any) {
@@ -72,7 +73,7 @@ export default function SignIn() {
           console.log(result)
 
           setIsExist(true);
-          navigate("/blog-list")
+          // navigate("/blog-list")
         } else {
           alert(response.data.message)
         }
@@ -97,14 +98,12 @@ export default function SignIn() {
   };
 
   return (
-    // <>
-    //   {success ? (
-    //     <>
-    //       <h1>
-    //         Success!
-    //       </h1>
-    //     </>
-    //   ) : (
+    <>
+      {isExist ? (
+        <>
+          <Home isExist={isExist} />
+        </>
+      ) : (
         <ThemeProvider theme={defaultTheme}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -203,7 +202,7 @@ export default function SignIn() {
             <Copyright sx={{ mt: 4, mb: 4 }} />
           </Container>
         </ThemeProvider>
-    //   )}
-    // </>
+      )}
+    </>
   );
 }
