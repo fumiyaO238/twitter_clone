@@ -38,6 +38,7 @@ export default function SignUp() {
   const [isRevealPassword, setIsRevealPassword] = useState(false);
   const [isRevealConfirmPassword, setIsRevealConfirmPassword] = useState(false);
   const [msg, setMsg] = useState("");
+
   const navigate = useNavigate();
 
   // パスワード表示切替
