@@ -43,7 +43,7 @@ export default function SignIn() {
   const [msg, setMsg] = useState("");
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [isExist, setIsExist] = useState(false);
   const [isRevealPassword, setIsRevealPassword] = useState(false);
   const { register, watch, formState: { errors } } = useForm();
 
@@ -71,7 +71,7 @@ export default function SignIn() {
           console.log("ログイン成功")
           console.log(result)
 
-          setSuccess(true);
+          setIsExist(true);
           navigate("/blog-list")
         } else {
           alert(response.data.message)

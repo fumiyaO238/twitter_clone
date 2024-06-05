@@ -37,6 +37,10 @@ const defaultTheme = createTheme();
 export default function Start() {
   const [isRevealPassword, setIsRevealPassword] = useState(false);
   const [msg, setMsg] = useState("");
+  const [email, setEmail] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [isExist, setIsExist] = useState(false);
+
   const navigate = useNavigate();
 
   // パスワード表示切替
@@ -45,39 +49,42 @@ export default function Start() {
   }
 
   // api通信返事処理
-  const login = async (email: any, password: any) => {
+  const login = async (email: any, pwd: any) => {
     await axios
-      .post("http://localhost:3333/login", {
+      .post("http://localhost:3333/login",{
         email: email,
-        password: password
+        pwd: pwd
       })
       .then((response) => {
         const result = response.data.result;
-        if(result) {
+        setEmail("");
+        setPwd("");
+        if (result.length === 1) {
           console.log("ログイン成功")
+          console.log(result)
+
+          setIsExist(true);
           navigate("/blog-list")
         } else {
-          alert("ログインに失敗しました。\n入力された情報が間違っています。")
+          alert(response.data.message)
         }
       })
       .catch((error) => {
         console.log("ログイン失敗")
-        console.log(error);
+        alert(error.response.data.message);
       })
   }
 
   // DBのデータと照合チェック
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get("email");
-    const password = data.get("password");
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(email, pwd);
 
-    if(email === "" || password === "") {
+    if (email === "" || pwd === "") {
       setMsg("未入力箇所があります。")
     } else {
       console.log("DBに値送信します")
-      login(email, password);
+      login(email, pwd);
     }
   };
 
@@ -127,42 +134,36 @@ export default function Start() {
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             {/* email */}
             <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            {/* password */}
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type={isRevealPassword ? "text" : "password"}
-              id="password"
-              autoComplete="current-password"
-              InputProps={{
-                endAdornment:
-                  <InputAdornment position="end">
-                    {isRevealPassword ? (
-                      // 表示
-                      <VisibilityOffIcon
-                      onClick={togglePassword}
-                      className="Password__visual"
-                      sx={{
-                        ":hover": {
-                          cursor: "default",
-                        }
-                      }}
-                    />
-                    ) : (
-                      // 非表示
-                      <VisibilityIcon
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  autoComplete="off"
+                  margin="normal"
+                  required
+                  fullWidth
+                  autoFocus
+                />
+
+                {/* password */}
+                <TextField
+                  id="password"
+                  label="Password"
+                  name="password"
+                  type={isRevealPassword ? "text" : "password"}
+                  onChange={(e) => setPwd(e.target.value)}
+                  value={pwd}
+                  autoComplete="off"
+                  margin="normal"
+                  required
+                  fullWidth
+                  InputProps={{
+                    endAdornment:
+                      <InputAdornment position="end">
+                        {isRevealPassword ? (
+                        // 表示
+                        <VisibilityOffIcon
                         onClick={togglePassword}
                         className="Password__visual"
                         sx={{
@@ -171,10 +172,21 @@ export default function Start() {
                           }
                         }}
                       />
-                    )}
-                  </InputAdornment>
-              }}
-            />
+                      ) : (
+                        // 非表示
+                        <VisibilityIcon
+                          onClick={togglePassword}
+                          className="Password__visual"
+                          sx={{
+                            ":hover": {
+                              cursor: "default",
+                            }
+                          }}
+                        />
+                      )}
+                      </InputAdornment>
+                  }}
+                />
             <Button
               type="submit"
               fullWidth
