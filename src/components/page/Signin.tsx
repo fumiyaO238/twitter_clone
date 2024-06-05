@@ -73,7 +73,7 @@ export default function SignIn() {
           console.log(result)
 
           setIsExist(true);
-          // navigate("/blog-list")
+          navigate("/:id")
         } else {
           alert(response.data.message)
         }
@@ -99,12 +99,7 @@ export default function SignIn() {
 
   return (
     <>
-      {isExist ? (
-        <>
-          <Home isExist={isExist} />
-        </>
-      ) : (
-        <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={defaultTheme}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -201,8 +196,7 @@ export default function SignIn() {
             </Box>
             <Copyright sx={{ mt: 4, mb: 4 }} />
           </Container>
-        </ThemeProvider>
-      )}
+      </ThemeProvider>
     </>
   );
 }
