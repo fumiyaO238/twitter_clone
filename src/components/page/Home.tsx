@@ -53,7 +53,7 @@ export default function Signin() {
       })
       .then((response) => {
         const result = response.data.result;
-        if(result.length === 1) {
+        if(result) {
           console.log("ログイン成功")
           navigate("/blog-list")
         } else {

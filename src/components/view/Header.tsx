@@ -44,7 +44,7 @@ const settings = [
     },
     {
       title:'Logout',
-      url:'/logout'
+      url:'/'
     },
     
   ];
