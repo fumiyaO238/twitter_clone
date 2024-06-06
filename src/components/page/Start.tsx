@@ -49,23 +49,28 @@ export default function Start() {
     setIsRevealPassword((prevState) => !prevState);
   }
 
-  // api通信返事処理
-  const login = async (email: any, pwd: any) => {
+  // tokenからユーザー情報を取得
+  const tokenCheck = async (e: string) => {
+    const successToken = e
     await axios
-      .post("http://localhost:3333/login",{
-        email: email,
-        pwd: pwd
+      .post("http://localhost:3333/token",{
+        successToken: successToken
       })
       .then((response) => {
-        const result = response.data.result;
+        const user = response.data.result;
+        const passedToken = response.data.passedToken;
+        const userName = user[0].name
         setEmail("");
         setPwd("");
-        if (result.length === 1) {
-          console.log("ログイン成功")
-          console.log(result)
 
-          setIsExist(true);
-          // navigate("/blog-list")
+        if (user) {
+          console.log("ログイン成功")
+          // console.log(user)
+          // console.log(passedToken)
+
+          // localStarageへ保存
+          localStorage.setItem("keyToken", passedToken);
+          navigate(`/home/#${userName}`)
         } else {
           alert(response.data.message)
         }
@@ -76,7 +81,30 @@ export default function Start() {
       })
   }
 
-  // DBのデータと照合チェック
+  // api通信処理
+  const login = async (email: any, pwd: any) => {
+    await axios
+      .post("http://localhost:3333/login",{
+        email: email,
+        pwd: pwd
+      })
+      .then((response) => {
+        const successToken = response.data.token;
+        setEmail("");
+        setPwd("");
+        if (successToken) {
+          tokenCheck(successToken)
+        } else {
+          alert(response.data.message)
+        }
+      })
+      .catch((error) => {
+        console.log("ログイン失敗")
+        alert(error.response.data.message);
+      })
+  }
+
+  // 入力箇所チェック
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(email, pwd);
@@ -91,97 +119,81 @@ export default function Start() {
 
   return (
     <>
-      {isExist ? (
-        <>
-          <Home isExist={isExist} />
-        </>
-      ) : (
-    <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
-        <CssBaseline />
-        {/* Home画面左側の写真 */}
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
-          {/* <h1 className='home-title'>New Jeans</h1> */}
-        </Grid>
-
-        {/* Home画面右側のsignin画面 */}
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <Box
+      <ThemeProvider theme={defaultTheme}>
+        <Grid container component="main" sx={{ height: '100vh' }}>
+          <CssBaseline />
+          {/* Home画面左側の写真 */}
+          <Grid
+            item
+            xs={false}
+            sm={4}
+            md={7}
             sx={{
-              my: 8,
-              mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: (t) =>
+                t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
             }}
           >
-            <h1 style={{fontSize: 55, marginBottom: 0}}>Welcome to Diary</h1>
-            <h2 style={{marginTop: 0}}>Create your own blog!</h2>
+            {/* <h1 className='home-title'>New Jeans</h1> */}
+          </Grid>
 
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <div style={{ color: "red" }}>{msg}</div>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            {/* email */}
-            <TextField
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  autoComplete="off"
-                  margin="normal"
-                  required
-                  fullWidth
-                  autoFocus
-                />
+          {/* Home画面右側のsignin画面 */}
+          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+            <Box
+              sx={{
+                my: 8,
+                mx: 4,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <h1 style={{fontSize: 55, marginBottom: 0}}>Welcome to Diary</h1>
+              <h2 style={{marginTop: 0}}>Create your own blog!</h2>
 
-                {/* password */}
-                <TextField
-                  id="password"
-                  label="Password"
-                  name="password"
-                  type={isRevealPassword ? "text" : "password"}
-                  onChange={(e) => setPwd(e.target.value)}
-                  value={pwd}
-                  autoComplete="off"
-                  margin="normal"
-                  required
-                  fullWidth
-                  InputProps={{
-                    endAdornment:
-                      <InputAdornment position="end">
-                        {isRevealPassword ? (
-                        // 表示
-                        <VisibilityOffIcon
-                        onClick={togglePassword}
-                        className="Password__visual"
-                        sx={{
-                          ":hover": {
-                            cursor: "default",
-                          }
-                        }}
-                      />
-                      ) : (
-                        // 非表示
-                        <VisibilityIcon
+              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <div style={{ color: "red" }}>{msg}</div>
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              {/* email */}
+              <TextField
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    autoComplete="off"
+                    margin="normal"
+                    required
+                    fullWidth
+                    autoFocus
+                  />
+
+                  {/* password */}
+                  <TextField
+                    id="password"
+                    label="Password"
+                    name="password"
+                    type={isRevealPassword ? "text" : "password"}
+                    onChange={(e) => setPwd(e.target.value)}
+                    value={pwd}
+                    autoComplete="off"
+                    margin="normal"
+                    required
+                    fullWidth
+                    InputProps={{
+                      endAdornment:
+                        <InputAdornment position="end">
+                          {isRevealPassword ? (
+                          // 表示
+                          <VisibilityOffIcon
                           onClick={togglePassword}
                           className="Password__visual"
                           sx={{
@@ -190,35 +202,45 @@ export default function Start() {
                             }
                           }}
                         />
-                      )}
-                      </InputAdornment>
-                  }}
-                />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link />
+                        ) : (
+                          // 非表示
+                          <VisibilityIcon
+                            onClick={togglePassword}
+                            className="Password__visual"
+                            sx={{
+                              ":hover": {
+                                cursor: "default",
+                              }
+                            }}
+                          />
+                        )}
+                        </InputAdornment>
+                    }}
+                  />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link />
+                </Grid>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ mt: 4, mb: 4 }} />
-          </Box>
-          </Box>
+              <Copyright sx={{ mt: 4, mb: 4 }} />
+            </Box>
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
-    </ThemeProvider>
-    )}
+      </ThemeProvider>
     </>
   );
 }

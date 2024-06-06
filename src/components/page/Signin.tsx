@@ -38,42 +38,40 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const navigate = useNavigate();
-  const userRef = useRef();
-  const errRef = useRef();
 
   const [msg, setMsg] = useState("");
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const [isExist, setIsExist] = useState(false);
   const [isRevealPassword, setIsRevealPassword] = useState(false);
   const { register, watch, formState: { errors } } = useForm();
-
-  useEffect(() => {
-    // userRef.current.focus();
-  }, [])
 
   // パスワード表示切替
   const togglePassword = () => {
     setIsRevealPassword((prevState) => !prevState);
   }
 
-  // api通信返事処理
-  const login = async (email: any, pwd: any) => {
+  // tokenからユーザー情報を取得
+  const tokenCheck = async (e: string) => {
+    const successToken = e
     await axios
-      .post("http://localhost:3333/login",{
-        email: email,
-        pwd: pwd
+      .post("http://localhost:3333/token",{
+        successToken: successToken
       })
       .then((response) => {
-        const result = response.data.result;
+        const user = response.data.result;
+        const passedToken = response.data.passedToken;
+        const userName = user[0].name
         setEmail("");
         setPwd("");
-        if (result.length === 1) {
-          console.log("ログイン成功")
-          console.log(result)
 
-          setIsExist(true);
-          navigate("/:id")
+        if (user) {
+          console.log("ログイン成功")
+          // console.log(user)
+          // console.log(passedToken)
+
+          // localStarageへ保存
+          localStorage.setItem("keyToken", passedToken);
+          navigate(`/home/#${userName}`)
         } else {
           alert(response.data.message)
         }
@@ -84,7 +82,30 @@ export default function SignIn() {
       })
   }
 
-  // DBのデータと照合チェック
+  // api通信処理
+  const login = async (email: any, pwd: any) => {
+    await axios
+      .post("http://localhost:3333/login",{
+        email: email,
+        pwd: pwd
+      })
+      .then((response) => {
+        const successToken = response.data.token;
+        setEmail("");
+        setPwd("");
+        if (successToken) {
+          tokenCheck(successToken)
+        } else {
+          alert(response.data.message)
+        }
+      })
+      .catch((error) => {
+        console.log("ログイン失敗")
+        alert(error.response.data.message);
+      })
+  }
+
+  // 入力箇所チェック
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(email, pwd);
