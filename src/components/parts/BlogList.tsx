@@ -60,8 +60,15 @@ const BlogList = () => {
 
   // getリクエスト
   useEffect(() => {
+    const token = localStorage.getItem("keyToken")
     setTimeout(() => {
-      axios.get("http://localhost:3333")
+      axios.get("http://localhost:3333",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
         .then((response) => {
           setIsPending(false)
           const { blogs } = response.data;
@@ -81,7 +88,7 @@ const BlogList = () => {
       </nav>
 
       <div>
-        {isPending && <h3 style={{margin: 30}}>Now Loading...</h3>}
+        {isPending && <h3 style={{ margin: 30 }}>Now Loading...</h3>}
       </div>
       {/* <form onSubmit={handleSubmit(addBlog)}>
       <input {...register("content")} type="text" />
@@ -93,7 +100,7 @@ const BlogList = () => {
             <div className="blog-preview" key={blog.id} >
               <p className="author">投稿者 : {blog.user_id}</p>
               <h4>{blog.content}</h4>
-              <span style={{display: "flex"}}>
+              <span style={{ display: "flex" }}>
                 <p className="date">投稿日時 : {blog.created_at}</p>
                 <button className="button" onClick={() => deleteBlog(blog.id)}>
                   delete

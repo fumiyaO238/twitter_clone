@@ -70,7 +70,7 @@ export default function SignIn() {
           // console.log(passedToken)
 
           // localStarageへ保存
-          localStorage.setItem("keyToken", passedToken);
+          localStorage.setItem(user.id, passedToken);
           navigate(`/home/#${userName}`)
         } else {
           alert(response.data.message)
