@@ -3,7 +3,7 @@ import axios from "axios";
 // import { useForm } from "react-hook-form";
 import '../styles/styleBlogList.css';
 
-type BlogType = {
+export type BlogType = {
   id: number;
   content: string;
   user_id: string;
@@ -73,6 +73,7 @@ const BlogList = () => {
           setIsPending(false)
           const { blogs } = response.data;
           setBlogs(blogs);
+          console.log(blogs)
         });
     }, 1000);
   }, []);
