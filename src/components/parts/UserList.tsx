@@ -29,7 +29,7 @@ const UserList = () => {
           const resUsers = response.data.blogs;
           setUsers(resUsers);
         });
-    }, 1000);
+    }, 300);
   }, []);
 
   const handleClickFollow = (id: string) => {

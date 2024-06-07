@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import { useForm } from "react-hook-form";
 import '../styles/styleBlogList.css';
 
 export type BlogType = {
@@ -17,7 +16,7 @@ type BlogUserType = {
   content: string;
   created_at: any;
   content_id: number;
-}
+};
 
 // type AddBlogType = {
 //   content: string;
@@ -80,7 +79,7 @@ const BlogList = () => {
           setBlogs(blogs);
           console.log(blogs)
         });
-    }, 1000);
+    }, 300);
   }, []);
 
   return (
