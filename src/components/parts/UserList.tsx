@@ -6,7 +6,7 @@ import Header from "../view/Header";
 import Footer from "../view/Footer";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-type UserType = {
+export type UserType = {
   id: string;
   name: string;
   email?: string;

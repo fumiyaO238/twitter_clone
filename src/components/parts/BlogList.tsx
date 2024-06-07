@@ -11,14 +11,21 @@ export type BlogType = {
   updated_at: any;
 };
 
+type BlogUserType = {
+  id: string;
+  name: string;
+  content: string;
+  created_at: any;
+  content_id: number;
+}
+
 // type AddBlogType = {
 //   content: string;
 //   // id: string;
 // }
 
 const BlogList = () => {
-  const [blogs, setBlogs] = useState<BlogType[]>([]);
-  // const { register, handleSubmit } = useForm<AddBlogType>();
+  const [blogs, setBlogs] = useState<BlogUserType[]>([]);
   const [isPending, setIsPending] = useState(true);
 
   // ブログの追加
@@ -40,9 +47,7 @@ const BlogList = () => {
   // }
 
   // ブログの削除
-  const deleteBlog = async (id: number) => {
-    // console.log(id)
-
+  const deleteBlog = async (id: string) => {
     await axios
       .delete("http://localhost:3333/delete", {
         data: { id }
@@ -71,7 +76,7 @@ const BlogList = () => {
       )
         .then((response) => {
           setIsPending(false)
-          const { blogs } = response.data;
+          const blogs = response.data.result;
           setBlogs(blogs);
           console.log(blogs)
         });
@@ -98,8 +103,8 @@ const BlogList = () => {
       <div className="blog-list">
         <div className="blogs">
           {blogs.map((blog) => (
-            <div className="blog-preview" key={blog.id} >
-              <p className="author">投稿者 : {blog.user_id}</p>
+            <div className="blog-preview" key={blog.content_id} >
+              <p className="author">投稿者 : {blog.name}</p>
               <h4>{blog.content}</h4>
               <span style={{ display: "flex" }}>
                 <p className="date">投稿日時 : {blog.created_at}</p>
