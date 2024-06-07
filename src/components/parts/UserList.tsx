@@ -15,17 +15,17 @@ export type UserType = {
   updated_at?: any;
 };
 
-type RelationshipsType = {
+type RelstionshipsType = {
   id: number;
   follower_id: string;
-  followed_id: string;
+  followeing_id: string;
   created_at?: any;
   updated_at?: any;
 }
 
 const UserList = () => {
   const [users, setUsers] = useState<UserType[]>([]);
-  const [rel, setRel] = useState<RelationshipsType[]>([]);
+  const [rel, setRel] = useState<RelstionshipsType[]>([]);
   const [myUserId, setMyUserId] = useState("");
   const [isPending, setIsPending] = useState(true);
   // const [isFollowing, setIsFollowing] = useState(false);
