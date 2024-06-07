@@ -99,7 +99,7 @@ const UserList = () => {
                   {/* <p>2024年04月から利用しています</p> */}
                   {user.id !== `${myUserId}` &&
                     <button onClick={() => { handleClickFollow(user.id) }}>
-                      {/* {isFollowing ? "Follow" : "UnFollow"} */}
+                      {/* {myUserId === rel.follower_id ? "Follow" : "UnFollow"} */}
                       follow
                     </button>
                   }
