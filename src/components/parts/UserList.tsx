@@ -15,11 +15,20 @@ export type UserType = {
   updated_at?: any;
 };
 
+type RelationshipsType = {
+  id: number;
+  follower_id: string;
+  followed_id: string;
+  created_at?: any;
+  updated_at?: any;
+}
+
 const UserList = () => {
   const [users, setUsers] = useState<UserType[]>([]);
+  const [rel, setRel] = useState<RelationshipsType[]>([]);
   const [myUserId, setMyUserId] = useState("");
   const [isPending, setIsPending] = useState(true);
-  const [isFollowing, setIsFollowing] = useState(false);
+  // const [isFollowing, setIsFollowing] = useState(false);
   let startedDate = [];
 
   // getリクエスト
@@ -33,19 +42,33 @@ const UserList = () => {
           }
         })
         .then((response) => {
+          console.log(response.data)
           setIsPending(false)
-          const resUsers = response.data.users;
+          const resUsers = response.data.usersResult;
           const getMyUserID = response.data.user_id;
+          const getRel = response.data.relResult;
           setUsers(resUsers);
+          setRel(getRel);
           setMyUserId(getMyUserID)
         });
     }, 300);
   }, []);
 
-  console.log(users)
+  // フォロー処理
+  const handleClickFollow = (followedId: string) => {
+    // setIsFollowing(!isFollowing)
 
-  const handleClickFollow = (id: string) => {
-    setIsFollowing(!isFollowing)
+    axios.post("http://localhost:3333/user-follow",
+      {
+        myUserId: myUserId,
+        followedId: followedId
+      })
+      .then((response) => {
+        setIsPending(false)
+        const result = response.data.result
+        // console.log(result)
+      });
+
   }
 
   return (
@@ -66,7 +89,7 @@ const UserList = () => {
                     <h4>{user.name}</h4>
                   </Link>
                   {/* 絶対良くないやり方 */}
-                  <div className="表示させない" style={{fontSize:0}}>
+                  <div className="表示させない" style={{ fontSize: 0 }}>
                     {startedDate = user.created_at.split("T")}
                     {startedDate = startedDate[0].split("-")}
                   </div>
@@ -76,7 +99,8 @@ const UserList = () => {
                   {/* <p>2024年04月から利用しています</p> */}
                   {user.id !== `${myUserId}` &&
                     <button onClick={() => { handleClickFollow(user.id) }}>
-                      {isFollowing ? "Follow" : "UnFollow"}
+                      {/* {isFollowing ? "Follow" : "UnFollow"} */}
+                      follow
                     </button>
                   }
                 </div>
