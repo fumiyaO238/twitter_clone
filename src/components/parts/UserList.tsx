@@ -17,20 +17,32 @@ export type UserType = {
 
 const UserList = () => {
   const [users, setUsers] = useState<UserType[]>([]);
+  const [myUserId, setMyUserId] = useState("");
   const [isPending, setIsPending] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
+  let startedDate = [];
 
   // getリクエスト
   useEffect(() => {
+    const token = localStorage.getItem("keyToken")
     setTimeout(() => {
-      axios.get("http://localhost:3333/userlist")
+      axios.get("http://localhost:3333/userlist",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
         .then((response) => {
           setIsPending(false)
-          const resUsers = response.data.blogs;
+          const resUsers = response.data.users;
+          const getMyUserID = response.data.user_id;
           setUsers(resUsers);
+          setMyUserId(getMyUserID)
         });
     }, 300);
   }, []);
+
+  console.log(users)
 
   const handleClickFollow = (id: string) => {
     setIsFollowing(!isFollowing)
@@ -53,8 +65,16 @@ const UserList = () => {
                   <Link to={user.id}>
                     <h4>{user.name}</h4>
                   </Link>
-                  <p>2024年04月から利用しています</p>
-                  {user.id !== "id1" &&              //自分のにはボタン付けない
+                  {/* 絶対良くないやり方 */}
+                  <div className="表示させない" style={{fontSize:0}}>
+                    {startedDate = user.created_at.split("T")}
+                    {startedDate = startedDate[0].split("-")}
+                  </div>
+                  <p>
+                    {`${startedDate[0]}年${startedDate[1]}月から利用しています`}
+                  </p>
+                  {/* <p>2024年04月から利用しています</p> */}
+                  {user.id !== `${myUserId}` &&
                     <button onClick={() => { handleClickFollow(user.id) }}>
                       {isFollowing ? "Follow" : "UnFollow"}
                     </button>
