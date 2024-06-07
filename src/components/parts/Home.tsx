@@ -29,7 +29,6 @@ const Home = () => {
       })
   }
 
-  // ※トークンからユーザー情報とって、そのユーザーのブログのみを表示
   // getリクエスト
   useEffect(() => {
     const token = localStorage.getItem("keyToken")

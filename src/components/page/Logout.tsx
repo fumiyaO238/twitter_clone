@@ -1,12 +1,12 @@
-import React from 'react'
-
 const Logout = () => {
+  console.log("logoutページ来たよ")
+
+  localStorage.clear();
+   window.location.href = "/"
+
   return (
-    <div>
-      <h3>Logout</h3>
-      <p>localsorageにあるtoken削除</p>
-    </div>
+    <div></div>
   )
 }
 
-export default Logout
+export default Logout;

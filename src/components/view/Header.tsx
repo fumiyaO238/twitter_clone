@@ -78,7 +78,7 @@ function ViewHeader() {
             variant="h3"
             noWrap
             component="a"
-            href="/user-list"
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
