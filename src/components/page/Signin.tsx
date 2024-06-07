@@ -71,7 +71,7 @@ export default function SignIn() {
 
           // localStarageへ保存
           localStorage.setItem(user.id, passedToken);
-          navigate(`/home/#${userName}`)
+          navigate(`/home`)
         } else {
           alert(response.data.message)
         }

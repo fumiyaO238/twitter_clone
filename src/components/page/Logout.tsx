@@ -2,7 +2,10 @@ import React from 'react'
 
 const Logout = () => {
   return (
-    <div>Logout</div>
+    <div>
+      <h3>Logout</h3>
+      <p>localsorageにあるtoken削除</p>
+    </div>
   )
 }
 

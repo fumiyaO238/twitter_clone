@@ -70,7 +70,7 @@ export default function Start() {
 
           // localStarageへ保存
           localStorage.setItem("keyToken", passedToken);
-          navigate(`/home#${userName}`)
+          navigate(`/home`)
         } else {
           alert(response.data.message)
         }

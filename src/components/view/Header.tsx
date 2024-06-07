@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 const pages = [
   {
     title:'Home',
-    url:'/'
+    url:'/home'
   },
   {
     title:'Blog',
@@ -44,7 +44,7 @@ const settings = [
     // },
     {
       title:'Logout',
-      url:'/'
+      url:'/logout'
     },
     
   ];
