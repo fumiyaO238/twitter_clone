@@ -35,22 +35,22 @@ const Home = () => {
   // getリクエスト
   useEffect(() => {
     const token = localStorage.getItem("keyToken")
-    setTimeout(() => {
-      axios.get("http://localhost:3333/my-blogs",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+
+    axios.get("http://localhost:3333/my-blogs",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-      )
-        .then((response) => {
-          const myBlogs = response.data.blogResult;
-          const myProfile = response.data.userResult;
-          setMyBlogs(myBlogs);
-          setMyProfile(myProfile)
-          setUserName(myProfile[0].name);
-        });
-    }, 1000);
+      }
+    )
+      .then((response) => {
+        const myBlogs = response.data.blogResult;
+        const myProfile = response.data.userResult;
+        setMyBlogs(myBlogs);
+        setMyProfile(myProfile)
+        setUserName(myProfile[0].name);
+      });
+
   }, []);
 
   return (
