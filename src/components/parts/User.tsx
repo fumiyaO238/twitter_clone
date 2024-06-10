@@ -5,7 +5,7 @@ import { BlogType } from "./BlogList";
 import Header from "../view/Header";
 import axios from "axios";
 import Footer from "../view/Footer";
-
+import "../styles/styleIndividualUserPage.css";
 
 const User = () => {
   const [myBlogs, setMyBlogs] = useState<BlogType[]>([]);
@@ -62,7 +62,7 @@ const User = () => {
       <div className="bloglist">
         {/* タイトル */}
         <nav className="navbar">
-          <h1>MyBlogList</h1>
+          <h1>{userName}</h1>
           <div className="links">
             <a href="/create">New Blog</a>
           </div>

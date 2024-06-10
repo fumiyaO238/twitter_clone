@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+.navbar {
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  border-bottom: 2px solid #ababab;
+}
+.navbar h1 {
+  color: #000000;
+  font-size: 30px;
+  font-family: "Quicksand";
+  margin: 4px;
+}
+.navbar .links {
+  margin-left: auto;
+  margin-top: 5px;
+}
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 10px;
+  color: white;
+  background-color: #f1356d;
+  border-radius: 10px;
+}
+.navbar a:hover {
+  color: #f1356d;
+}
+.content {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* blog previews / list */
+.blogs {
+  width:100%;height:auto;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  margin-top: 10px;
+}
+.blog-preview {
+  width: calc(100% / 5);
+  height:auto;
+  display:flex;
+  flex-direction:column;
+  list-style: none;
+  background: #bee9ffcf;
+  text-align: center;
+  border: 2px solid #fff;
+  color: #000000;
+  padding: 10px 16px;
+  margin: 10px 0;
+  border-bottom: 1px solid #fafafa;
+  border-radius: 10px;
+}
+
+/* blogList内のテキスト設定 */
+.author {
+  text-align: start;
+  margin-top: 0%;
+}
+.blog-preview span {
+  justify-content: flex-end;
+}
+.blog-list p {
+  font-size: small;
+  margin-top: auto;
+  margin-bottom: 0;
+}
+.blog-preview button {
+  margin-left: 5px;
+  margin-right: 0;
+  margin-bottom: 0;
+}

@@ -31,7 +31,6 @@ const Home = () => {
         setMyBlogs(myBlogs);
       })
   }
-
   // getリクエスト
   useEffect(() => {
     const token = localStorage.getItem("keyToken")
@@ -71,7 +70,7 @@ const Home = () => {
           <div className="bloglist">
             {/* タイトル */}
             <nav className="navbar">
-              <h1>MyBlogList</h1>
+              <h1>MyBlogs</h1>
               <div className="links">
                 <a href="/create">New Blog</a>
               </div>
@@ -92,7 +91,6 @@ const Home = () => {
                 ))}
               </div>
             </div>
-
           </div>
           <div className="header">
             <Footer />
