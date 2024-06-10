@@ -68,8 +68,10 @@ const User = () => {
           <h1>{userName}</h1>
         </nav>
         <div className="user-info">
-          <div className="flw">
+          <div className="flw-left">
             <h3>2 Followings</h3>
+          </div>
+          <div className="flw-right">
             <h3>2 Followers</h3>
           </div>
         </div>

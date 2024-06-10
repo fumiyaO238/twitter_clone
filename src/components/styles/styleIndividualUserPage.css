@@ -42,8 +42,19 @@
   width: 50%;
   float: left;
 }
-.flw {
-  display: flex;
+.flw-left {
+  width: 25%;
+  float: left;
+  margin-left: 96px;
+  margin-right: 96px;
+}
+.flw-right {
+  width: 25%;
+  float: right;
+  margin-left: 96px;
+  margin-right: 96px;
+}
+.user-info h3 {
   justify-content: center;
 }
 
