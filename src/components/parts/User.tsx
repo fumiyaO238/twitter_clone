@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { UserType } from "./UserList";
 import { BlogType } from "./BlogList";
@@ -61,20 +61,20 @@ const User = () => {
       </div>
       <div className="bloglist">
         {/* タイトル */}
-        <nav className="navbar">
+        <nav className="user-navbar">
           <h1>{userName}</h1>
           <div className="links">
             <a href="/create">New Blog</a>
           </div>
         </nav>
-        <div className="blog-list">
-          <div className="blogs">
+        <div className="user-blog-list">
+          <div className="user-blogs">
             {myBlogs.map((blog) => (
-              <div className="blog-preview" key={blog.id} >
-                <p className="author">投稿者 : {userName}</p>
+              <div className="user-blog-preview" key={blog.id} >
+                <p className="user-author">投稿者 : {userName}</p>
                 <h4>{blog.content}</h4>
                 <span style={{ display: "flex" }}>
-                  <p className="date">投稿日時 : {blog.created_at}</p>
+                  <p className="user-date">投稿日時 : {blog.created_at}</p>
                   <button className="button" onClick={() => deleteBlog(blog.id)}>
                     delete
                   </button>

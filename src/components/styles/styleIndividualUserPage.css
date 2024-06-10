@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
-.navbar {
+.user-navbar {
   padding: 3px;
   display: flex;
   align-items: center;
@@ -9,17 +9,17 @@
   margin: 0 auto;
   border-bottom: 2px solid #ababab;
 }
-.navbar h1 {
+.user-navbar h1 {
   color: #000000;
   font-size: 30px;
   font-family: "Quicksand";
   margin: 4px;
 }
-.navbar .links {
+.user-navbar .links {
   margin-left: auto;
   margin-top: 5px;
 }
-.navbar a {
+.user-navbar a {
   margin-left: 16px;
   text-decoration: none;
   padding: 10px;
@@ -27,24 +27,24 @@
   background-color: #f1356d;
   border-radius: 10px;
 }
-.navbar a:hover {
+.user-navbar a:hover {
   color: #f1356d;
 }
-.content {
+.user-content {
   max-width: 600px;
   margin: 40px auto;
   padding: 20px;
 }
 
 /* blog previews / list */
-.blogs {
+.user-blogs {
   width:100%;height:auto;
   display:flex;
   flex-wrap:wrap;
   justify-content:space-between;
   margin-top: 10px;
 }
-.blog-preview {
+.user-blog-preview {
   width: calc(100% / 5);
   height:auto;
   display:flex;
@@ -61,19 +61,19 @@
 }
 
 /* blogList内のテキスト設定 */
-.author {
+.user-author {
   text-align: start;
   margin-top: 0%;
 }
-.blog-preview span {
+.user-blog-preview span {
   justify-content: flex-end;
 }
-.blog-list p {
+.user-blog-list p {
   font-size: small;
   margin-top: auto;
   margin-bottom: 0;
 }
-.blog-preview button {
+.user-blog-preview button {
   margin-left: 5px;
   margin-right: 0;
   margin-bottom: 0;
