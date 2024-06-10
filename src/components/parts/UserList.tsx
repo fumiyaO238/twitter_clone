@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Header from "../view/Header";
 import Footer from "../view/Footer";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { render } from "@testing-library/react";
 
 export type UserType = {
   id: string;
@@ -21,7 +22,7 @@ type RelstionshipsType = {
   created_at?: any;
   updated_at?: any;
   follower_id?: string;
-  followeing_id?: string;
+  following_id?: string;
 }
 
 const UserList = () => {
@@ -43,7 +44,6 @@ const UserList = () => {
           }
         })
         .then((response) => {
-          console.log(response.data)
           setIsPending(false)
           const getMyUserID = response.data.user_id;
           const resUsers = response.data.usersResult;
@@ -66,8 +66,8 @@ const UserList = () => {
       })
       .then((response) => {
         setIsPending(false)
-        const result = response.data.result
-        // console.log(result)
+        const getRel = response.data.relResult;
+        setRel(getRel);
       });
 
   }
@@ -97,11 +97,18 @@ const UserList = () => {
                   <p>
                     {`${startedDate[0]}年${startedDate[1]}月から利用しています`}
                   </p>
-                  {/* <p>2024年04月から利用しています</p> */}
                   {user.id !== `${myUserId}` &&
                     <button onClick={() => { handleClickFollow(user.id) }}>
-                      {/* {myUserId === rel.follower_id ? "Follow" : "UnFollow"} */}
-                      follow
+                      {(() => {
+                        for (let i = 0; i < rel.length; i++) {
+                          if(rel[i].following_id === user.id) {
+                            return "UN"
+                          } else {
+                            continue;
+                          }
+                        }
+                      })()}
+                      FOLLOW
                     </button>
                   }
                 </div>
