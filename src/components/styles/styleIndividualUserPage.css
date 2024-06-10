@@ -37,16 +37,30 @@
   padding: 20px;
 }
 
+/* 左側 */
+.user-info{
+  width: 50%;
+  float: left;
+}
+.flw {
+  display: flex;
+  justify-content: center;
+}
+
 /* blog previews / list */
+.user-blog-list {
+  width: 50%;
+  float: right;
+}
 .user-blogs {
   width:100%;height:auto;
   display:flex;
   flex-wrap:wrap;
-  justify-content:space-between;
+  justify-content:center;
   margin-top: 10px;
 }
 .user-blog-preview {
-  width: calc(100% / 5);
+  width: calc(100% / 2.5);
   height:auto;
   display:flex;
   flex-direction:column;

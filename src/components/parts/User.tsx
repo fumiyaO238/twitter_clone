@@ -66,11 +66,16 @@ const User = () => {
         {/* タイトル */}
         <nav className="user-navbar">
           <h1>{userName}</h1>
-          {/* <div className="links">
-            <a href={`/create/${userId}`}>New Blog</a>
-          </div> */}
         </nav>
+        <div className="user-info">
+          <div className="flw">
+            <h3>2 Followings</h3>
+            <h3>2 Followers</h3>
+          </div>
+        </div>
         <div className="user-blog-list">
+        <h3>{myBlogs.length} Blogs</h3>
+
           <div className="user-blogs">
             {myBlogs.map((blog) => (
               <div className="user-blog-preview" key={blog.id} >

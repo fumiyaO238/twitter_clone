@@ -1,10 +1,10 @@
 body {
   text-align: center;
 }
-h1 {
+.err h1 {
   font-size: 200px;
   margin-bottom: 0;
 }
-h2 {
+.err h2 {
   margin-top: 0;
 }

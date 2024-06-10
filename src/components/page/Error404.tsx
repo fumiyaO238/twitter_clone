@@ -3,7 +3,7 @@ import "../styles/styleError404.css";
 
 const Error404 = () => {
   return (
-    <div className="404">
+    <div className="err">
       <h1>404</h1>
       <h2>Page Not Found</h2>
       <Link to={"/home"}>
