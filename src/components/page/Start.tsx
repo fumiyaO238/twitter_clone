@@ -16,7 +16,6 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Home from '../parts/Home';
 
 // 最下部のコピーライト情報
 function Copyright(props: any) {
@@ -129,7 +128,8 @@ export default function Start() {
             sm={4}
             md={7}
             sx={{
-              backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+              // backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+              backgroundImage: 'url(https://images.unsplash.com/photo-1476610182048-b716b8518aae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8d2FsbHBhcGVyc3x8fHx8fDE3MTcxMTgzMDk&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080)',
               backgroundRepeat: 'no-repeat',
               backgroundColor: (t) =>
                 t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

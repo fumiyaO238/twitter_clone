@@ -16,11 +16,12 @@ export type UserType = {
 };
 
 type RelstionshipsType = {
-  id: number;
-  follower_id: string;
-  followeing_id: string;
+  id: string;
+  name: string;
   created_at?: any;
   updated_at?: any;
+  follower_id?: string;
+  followeing_id?: string;
 }
 
 const UserList = () => {
@@ -44,12 +45,12 @@ const UserList = () => {
         .then((response) => {
           console.log(response.data)
           setIsPending(false)
-          const resUsers = response.data.usersResult;
           const getMyUserID = response.data.user_id;
+          const resUsers = response.data.usersResult;
           const getRel = response.data.relResult;
+          setMyUserId(getMyUserID);
           setUsers(resUsers);
           setRel(getRel);
-          setMyUserId(getMyUserID)
         });
     }, 300);
   }, []);
