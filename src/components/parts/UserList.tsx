@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Header from "../view/Header";
 import Footer from "../view/Footer";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { render } from "@testing-library/react";
 
 export type UserType = {
   id: string;
@@ -30,7 +29,6 @@ const UserList = () => {
   const [rel, setRel] = useState<RelstionshipsType[]>([]);
   const [myUserId, setMyUserId] = useState("");
   const [isPending, setIsPending] = useState(true);
-  // const [isFollowing, setIsFollowing] = useState(false);
   let startedDate = [];
 
   // getリクエスト
@@ -86,7 +84,7 @@ const UserList = () => {
               <li className="list-item" key={user.id}>
                 <div className="flex">
                   <AccountCircleIcon style={{ fontSize: 50, color: "gray", marginLeft: "5px" }} />
-                  <Link to={user.id}>
+                  <Link to={`/user/${user.id}`}>
                     <h4>{user.name}</h4>
                   </Link>
                   {/* 絶対良くないやり方 */}
