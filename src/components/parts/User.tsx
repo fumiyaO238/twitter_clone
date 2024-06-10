@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { UserType } from "./UserList";
 import { BlogType } from "./BlogList";
@@ -10,6 +10,7 @@ import "../styles/styleIndividualUserPage.css";
 const User = () => {
   const [myBlogs, setMyBlogs] = useState<BlogType[]>([]);
   const [myProfile, setMyProfile] = useState<UserType[]>([]);
+  const [userId, setUserId] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
 
   const location = useLocation();
@@ -52,8 +53,10 @@ const User = () => {
         setMyBlogs(myBlogs);
         setMyProfile(myProfile)
         setUserName(myProfile[0].name);
+        setUserId(myProfile[0].id);
       });
   }, []);
+
   return (
     <div>
       <div className="header">
@@ -63,9 +66,9 @@ const User = () => {
         {/* タイトル */}
         <nav className="user-navbar">
           <h1>{userName}</h1>
-          <div className="links">
-            <a href="/create">New Blog</a>
-          </div>
+          {/* <div className="links">
+            <a href={`/create/${userId}`}>New Blog</a>
+          </div> */}
         </nav>
         <div className="user-blog-list">
           <div className="user-blogs">
@@ -75,9 +78,9 @@ const User = () => {
                 <h4>{blog.content}</h4>
                 <span style={{ display: "flex" }}>
                   <p className="user-date">投稿日時 : {blog.created_at}</p>
-                  <button className="button" onClick={() => deleteBlog(blog.id)}>
+                  {/* <button className="button" onClick={() => deleteBlog(blog.id)}>
                     delete
-                  </button>
+                  </button> */}
                 </span>
               </div>
             ))}

@@ -25,6 +25,7 @@ type BlogUserType = {
 
 const BlogList = () => {
   const [blogs, setBlogs] = useState<BlogUserType[]>([]);
+  const [myUserId, setMyUserId] = useState<string>("");
   const [isPending, setIsPending] = useState(true);
 
   // ブログの追加
@@ -76,8 +77,9 @@ const BlogList = () => {
         .then((response) => {
           setIsPending(false)
           const blogs = response.data.result;
+          const userId = response.data.userId
           setBlogs(blogs);
-          console.log(blogs)
+          setMyUserId(userId);
         });
     }, 300);
   }, []);
@@ -88,7 +90,7 @@ const BlogList = () => {
       <nav className="navbar">
         <h1>BlogList</h1>
         <div className="links">
-          <a href="/create">New Blog</a>
+          <a href={`/create/${myUserId}`}>New Blog</a>
         </div>
       </nav>
 

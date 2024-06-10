@@ -9,6 +9,7 @@ import { UserType } from './UserList';
 const Home = () => {
   const [myBlogs, setMyBlogs] = useState<BlogType[]>([]);
   const [myProfile, setMyProfile] = useState<UserType[]>([]);
+  const [myUserId, setMyUserId] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
 
   const getToken = localStorage.getItem("keyToken");
@@ -47,6 +48,7 @@ const Home = () => {
         const myProfile = response.data.userResult;
         setMyBlogs(myBlogs);
         setMyProfile(myProfile)
+        setMyUserId(myProfile[0].id);
         setUserName(myProfile[0].name);
       });
 
@@ -72,8 +74,8 @@ const Home = () => {
             <nav className="navbar">
               <h1>MyBlogs</h1>
               <div className="links">
-                <a href="/create">New Blog</a>
-              </div>
+          <a href={`/create/${myUserId}`}>New Blog</a>
+        </div>
             </nav>
             <div className="blog-list">
               <div className="blogs">
