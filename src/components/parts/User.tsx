@@ -171,7 +171,6 @@ const User = () => {
                 <p className="user-author">投稿者 : {userName}</p>
                 <h4>{blog.content}</h4>
                 <span style={{ display: "flex" }}>
-                  {/* 絶対良くないやり方 */}
                   <div className="表示させない" style={{ fontSize: 0 }}>
                     {createdDate = userBlogs[0].created_at.split("T")}
                     {createdTime = createdDate[1].split(".")}
