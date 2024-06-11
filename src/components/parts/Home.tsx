@@ -11,8 +11,9 @@ const Home = () => {
   const [myProfile, setMyProfile] = useState<UserType[]>([]);
   const [myUserId, setMyUserId] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
-
   const getToken = localStorage.getItem("keyToken");
+  let createdDate = [];
+  let createdTime = [];
 
   // ブログの削除
   const deleteBlog = async (id: number) => {
@@ -35,7 +36,6 @@ const Home = () => {
   // getリクエスト
   useEffect(() => {
     const token = localStorage.getItem("keyToken")
-
     axios.get("http://localhost:3333/my-blogs",
       {
         headers: {
@@ -74,8 +74,8 @@ const Home = () => {
             <nav className="navbar">
               <h1>MyBlogs</h1>
               <div className="links">
-          <a href={`/create/${myUserId}`}>New Blog</a>
-        </div>
+                <a href={`/create/${myUserId}`}>New Blog</a>
+              </div>
             </nav>
             <div className="blog-list">
               <div className="blogs">
@@ -84,7 +84,13 @@ const Home = () => {
                     <p className="author">投稿者 : {userName}</p>
                     <h4>{blog.content}</h4>
                     <span style={{ display: "flex" }}>
-                      <p className="date">投稿日時 : {blog.created_at}</p>
+                      {/* 絶対良くないやり方 */}
+                      <div className="表示させない" style={{ fontSize: 0 }}>
+                        {createdDate = blog.created_at.split("T")}
+                        {createdTime = createdDate[1].split(".")}
+                        {createdDate = createdDate[0].split("-")}
+                      </div>
+                      <p className="user-date">投稿日時 : {createdDate[0]}/{createdDate[1]}/{createdDate[2]} {createdTime[0]}</p>
                       <button className="button" onClick={() => deleteBlog(blog.id)}>
                         delete
                       </button>

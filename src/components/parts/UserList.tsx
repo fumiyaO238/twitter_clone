@@ -15,7 +15,7 @@ export type UserType = {
   updated_at?: any;
 };
 
-type RelstionshipsType = {
+export type RelstionshipsType = {
   id: string;
   name: string;
   created_at?: any;

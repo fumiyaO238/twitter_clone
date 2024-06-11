@@ -27,6 +27,8 @@ const BlogList = () => {
   const [blogs, setBlogs] = useState<BlogUserType[]>([]);
   const [myUserId, setMyUserId] = useState<string>("");
   const [isPending, setIsPending] = useState(true);
+  let createdDate = [];
+  let createdTime = [];
 
   // ブログの追加
   // const addBlog = async (event: AddBlogType) => {
@@ -108,7 +110,13 @@ const BlogList = () => {
               <p className="author">投稿者 : {blog.name}</p>
               <h4>{blog.content}</h4>
               <span style={{ display: "flex" }}>
-                <p className="date">投稿日時 : {blog.created_at}</p>
+                {/* 絶対良くないやり方 */}
+                <div className="表示させない" style={{ fontSize: 0 }}>
+                  {createdDate = blog.created_at.split("T")}
+                  {createdTime = createdDate[1].split(".")}
+                  {createdDate = createdDate[0].split("-")}
+                </div>
+                <p className="user-date">投稿日時 : {createdDate[0]}/{createdDate[1]}/{createdDate[2]} {createdTime[0]}</p>
                 <button className="button" onClick={() => deleteBlog(blog.id)}>
                   delete
                 </button>
