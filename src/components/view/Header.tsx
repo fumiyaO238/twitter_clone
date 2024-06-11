@@ -30,17 +30,13 @@ const pages = [
   }
 ];
 const settings = [
-    {
-      title:'Profile', 
-      url:'/profile'
-    },
-    {
-      title:'Account',
-      url:'/account'
-    },
     // {
-    //   title:'Dashboard',
-    //   url:'/dashboard'
+    //   title:'Profile', 
+    //   url:'/profile'
+    // },
+    // {
+    //   title:'Account',
+    //   url:'/account'
     // },
     {
       title:'Logout',
